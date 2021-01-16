@@ -1,9 +1,8 @@
 package entities;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
-import java.util.stream.Collectors;
 import entities.enums.WorkerLevel;
 
 public class Worker 
@@ -58,10 +57,6 @@ public class Worker
 	{
 		return list;
 	}
-	public void setList(List<HourContract> list) 
-	{
-		this.list = list;
-	}
 	
 	public void addContract(HourContract contract)
 	{
@@ -71,13 +66,15 @@ public class Worker
 	{
 		list.remove(contract);
 	}
-	public double income(Date dt)
+	public double income(Calendar dt)
 	{
-		List<HourContract> result = list.stream().filter(x -> x.getDate() == dt).collect(Collectors.toList());
 		double total = baseSalary;
-		for (HourContract hc : result)
+		for (HourContract hc : list)
 		{
-			total += hc.totalValue();
+			if(dt.get(Calendar.YEAR) == hc.getDate().get(Calendar.YEAR) && dt.get(Calendar.MONTH) == hc.getDate().get(Calendar.MONTH))
+			{
+				total += hc.totalValue();
+			}
 		}
 		return total;
 	}

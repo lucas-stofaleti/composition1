@@ -2,9 +2,10 @@ package application;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.Locale;
 import java.util.Scanner;
+
 import entities.Department;
 import entities.HourContract;
 import entities.Worker;
@@ -17,6 +18,9 @@ public class Main
 		Locale.setDefault(Locale.US);
 		Scanner sc = new Scanner (System.in);
 		SimpleDateFormat sdf = new SimpleDateFormat ("dd/MM/yyyy");
+		SimpleDateFormat sdf1 = new SimpleDateFormat ("MM/yyyy");
+		
+		
 		
 		System.out.print("Enter department's name: ");
 		Department dpte = new Department(sc.next());
@@ -37,13 +41,20 @@ public class Main
 			int j = i+1;
 			System.out.println("Enter contract #" + j + " data:");
 			System.out.print("Date (DD/MM/YYYY): ");
-			Date date = sdf.parse(sc.next());
+			Calendar date = Calendar.getInstance();
+			date.setTime(sdf.parse(sc.next()));
 			System.out.print("Value per hour: ");
 			double valuePerHour = sc.nextDouble();
 			System.out.print("Duration (hours): ");
 			int hours = sc.nextInt();
 			HourContract contract = new HourContract(date,valuePerHour,hours);
+			worker.addContract(contract);
 		}
+		
+		System.out.print("\nEnter month and year to calculate income (MM/YYYY): ");
+		Calendar date = Calendar.getInstance();
+		date.setTime(sdf1.parse(sc.next()));
+		System.out.println(worker.income(date));
 		
 		sc.close();
 	}

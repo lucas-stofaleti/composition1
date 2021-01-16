@@ -1,25 +1,25 @@
 package entities;
 
-import java.util.Date;
+import java.util.Calendar;
 
 public class HourContract 
 {
-	private Date date;
+	private Calendar date;
 	private double valuePerHour;
 	private int hours;
 	
-	public HourContract(Date date, double valuePerHour, int hours) 
+	public HourContract(Calendar date, double valuePerHour, int hours) 
 	{
 		this.date = date;
 		this.valuePerHour = valuePerHour;
 		this.hours = hours;
 	}
 
-	public Date getDate() 
+	public Calendar getDate() 
 	{
 		return date;
 	}
-	public void setDate(Date date) 
+	public void setDate(Calendar date) 
 	{
 		this.date = date;
 	}
