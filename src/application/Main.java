@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.Scanner;
-
 import entities.Department;
 import entities.HourContract;
 import entities.Worker;
@@ -19,9 +18,7 @@ public class Main
 		Scanner sc = new Scanner (System.in);
 		SimpleDateFormat sdf = new SimpleDateFormat ("dd/MM/yyyy");
 		SimpleDateFormat sdf1 = new SimpleDateFormat ("MM/yyyy");
-		
-		
-		
+
 		System.out.print("Enter department's name: ");
 		Department dpte = new Department(sc.next());
 		System.out.println("Enter worker data:");
@@ -54,7 +51,9 @@ public class Main
 		System.out.print("\nEnter month and year to calculate income (MM/YYYY): ");
 		Calendar date = Calendar.getInstance();
 		date.setTime(sdf1.parse(sc.next()));
-		System.out.println(worker.income(date));
+		System.out.println("Name: " + worker.getName());
+		System.out.println("Department: " + worker.getDpte().getName());
+		System.out.println("Income for " + sdf1.format(date.getTime()) + ": " + String.format("%.2f", worker.income(date)));
 		
 		sc.close();
 	}
